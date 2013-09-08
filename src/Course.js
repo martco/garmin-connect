@@ -8,7 +8,7 @@ Meters.prototype.toMiles = function() {
 
 function GarminCourse(data, options){
   this.data = data;
-  this.distanceUnit = options.distanceUnit || 'mile';
+  this.distanceUnit = options.distanceUnit || 'mi';
   this.timeUnit = options.timeUnit || 'minute';
   this.calories = 0;
   this.distance = {};
@@ -37,7 +37,7 @@ GarminCourse.prototype.setDistance = function() {
 
 GarminCourse.prototype.formattedDistance = function(distance) {
   switch(this.distanceUnit) {
-    case 'mile':
+    case 'mi':
       return distance.toMiles();
   }
 };

@@ -7,8 +7,8 @@ describe("GarminCourse", function() {
   })
 
   describe("distanceUnit", function(){
-    it("has a default distanceUnit of 'mile'", function() {
-      expect(course.distanceUnit).toBe('mile');
+    it("has a default distanceUnit of 'mi'", function() {
+      expect(course.distanceUnit).toBe('mi');
     });
 
     it("can receive and set a distanceUnit", function() {
