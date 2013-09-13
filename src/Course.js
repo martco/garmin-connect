@@ -17,29 +17,25 @@ Seconds.prototype.toMinutes = function() {
   };
 }
 
+sumOfIntegersInArray = function(arr){
+  return arr.reduce(function(previous, current){
+    return parseInt(previous) + parseInt(current);
+  });
+};
 
 function GarminCourse(data, options){
   this.data = data;
   this.distanceUnit = options.distanceUnit || 'mi';
   this.timeUnit = options.timeUnit || 'minute';
-  this.calories = 0;
-  this.distance = {};
-  this.duration = {};
-  this.pace = {};
-
-  this.addCalories();
-  this.setDuration();
 };
 
-GarminCourse.prototype.addCalories = function() {
-  calorieSum = 0;
-  calorieArray = this.nodeListToArray('Calories')
+GarminCourse.prototype.distanceSelector = 'DistanceMeters';
+GarminCourse.prototype.durationSelector = 'TotalTimeSeconds';
 
-  calorieArray.forEach(function(calorie){
-    calorieSum += parseInt(calorie.textContent);
-  });
+GarminCourse.prototype.getCalories = function() {
+  calorieArray = this.textContentFromNodeList('Calories')
 
-  this.calories = calorieSum;
+  return sumOfIntegersInArray(calorieArray);
 }
 
 GarminCourse.prototype.getDistance = function() {
@@ -47,25 +43,20 @@ GarminCourse.prototype.getDistance = function() {
 }
 
 GarminCourse.prototype.totalDistance = function() {
-  nodes = this.data.querySelectorAll(this.distanceSelector());
-  distanceSum = new Meters(nodes.item(nodes.length-1).textContent);
+  nodes = this.data.querySelectorAll(this.distanceSelector);
+  totalDistance = new Meters(nodes.item(nodes.length-1).textContent);
 
-  return distanceSum;
+  return totalDistance;
 }
 
-GarminCourse.prototype.setDuration = function() {
-  durationSum = 0;
-  durationArray = this.nodeListToArray(this.durationSelector());
+GarminCourse.prototype.totalDuration = function() {
+  durationArray = this.textContentFromNodeList(this.durationSelector);
 
-  durationArray.forEach(function(duration){
-    durationSum += parseInt(duration.textContent);
-  });
-
-  this.duration.value = durationSum;
+  return sumOfIntegersInArray(durationArray);
 }
 
 GarminCourse.prototype.getDuration = function() {
-  return this.duration.value;
+  return this.totalDuration();
 }
 
 GarminCourse.prototype.getPace = function() {
@@ -79,15 +70,17 @@ GarminCourse.prototype.formattedDistance = function(distance) {
   }
 };
 
-GarminCourse.prototype.distanceSelector = function() {
-  return 'DistanceMeters';
+GarminCourse.prototype.topMetersPerSecond = function() {
+  maxSpeeds = this.textContentFromNodeList('MaximumSpeed');
+  return Math.max.apply(Math, maxSpeeds);
 }
 
-GarminCourse.prototype.durationSelector = function() {
-  return 'TotalTimeSeconds';
-}
 
-GarminCourse.prototype.nodeListToArray = function(nodeListSelector) {
+GarminCourse.prototype.textContentFromNodeList = function(nodeListSelector) {
   nodeList = this.data.querySelectorAll(nodeListSelector);
-  return Array.prototype.slice.call(nodeList, 0);
+  return Array.prototype.map.call(nodeList, this.getTextContent);
+}
+
+GarminCourse.prototype.getTextContent = function(element) {
+  return element.textContent;
 }

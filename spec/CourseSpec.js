@@ -38,12 +38,12 @@ describe("GarminCourse", function() {
 
   });
 
-  it("sets the calories", function() { 
-    expect(course.calories).toEqual(407);
+  it("returns the calories", function() { 
+    expect(course.getCalories()).toEqual(407);
   });
 
-  it("sets the total duration", function() { 
-    expect(course.duration.value).toBeCloseTo(2406);
+  it("returns the total duration", function() { 
+    expect(course.getDuration()).toEqual(2406);
   });
 
   describe("getDistance()", function(){
@@ -55,6 +55,11 @@ describe("GarminCourse", function() {
   describe("getPace()", function(){
     it("returns the seconds value in seconds per mi", function() {
       expect(course.getPace()).toBeCloseTo(596.46, 2);
+    });
+  });
+  describe("topMetersPerSecond()", function(){
+    it("returns the highest value in MaximumSpeed", function() {
+      expect(course.topMetersPerSecond()).toEqual(17.238000869750977);
     });
   });
 });
