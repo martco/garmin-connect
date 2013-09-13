@@ -1,3 +1,12 @@
+describe("Seconds", function(){
+  it("can translate seconds to a minutes object", function(){
+    var seconds = new Seconds(191);
+    expect(seconds.toMinutes()).toEqual({ minute: 3, seconds: 11 });
+  });
+
+});
+
+
 describe("GarminCourse", function() {
   var course;
 
@@ -33,9 +42,19 @@ describe("GarminCourse", function() {
     expect(course.calories).toEqual(407);
   });
 
-  describe("distance", function(){
-    it("sets the distance's value property", function() {
-      expect(course.distance.value).toBeCloseTo(4.03, 2);
+  it("sets the total duration", function() { 
+    expect(course.duration.value).toBeCloseTo(2406);
+  });
+
+  describe("getDistance()", function(){
+    it("returns the distance's value property", function() {
+      expect(course.getDistance()).toBeCloseTo(4.03, 2);
+    });
+  });
+
+  describe("getPace()", function(){
+    it("returns the seconds value in seconds per mi", function() {
+      expect(course.getPace()).toBeCloseTo(596.46, 2);
     });
   });
 });
