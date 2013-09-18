@@ -24,6 +24,9 @@ gem 'jquery-rails'
 
 group :development, :test do
   gem "teaspoon"
+  gem "guard"
+  gem "guard-teaspoon"
+  gem "terminal-notifier-guard"
 end
 
 # To use ActiveModel has_secure_password
