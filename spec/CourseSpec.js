@@ -38,16 +38,20 @@ describe("GarminCourse", function() {
 
   });
 
-  it("returns the calories", function() { 
-    expect(course.getCalories()).toEqual(407);
+  describe("getCalories()", function(){
+    it("returns the calories", function() { 
+      expect(course.getCalories()).toEqual(407);
+    });
   });
 
-  it("returns the total duration", function() { 
-    expect(course.getDuration()).toEqual(2406);
+  describe("getDuration()", function(){
+    it("returns the total duration of the activity", function() { 
+      expect(course.getDuration()).toEqual(2406);
+    });
   });
 
   describe("getDistance()", function(){
-    it("returns the distance's value property", function() {
+    it("returns the total distance of the activity", function() {
       expect(course.getDistance()).toBeCloseTo(4.03, 2);
     });
   });
