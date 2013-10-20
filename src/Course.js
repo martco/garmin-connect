@@ -25,15 +25,11 @@ GarminCourse.prototype.totalDistance = function() {
   return totalDistance;
 }
 
-GarminCourse.prototype.totalDuration = function() {
+GarminCourse.prototype.getDuration = function() {
   nodeList = this.data.querySelectorAll(this.durationSelector);
   durationArray = textContentFromNodeList(nodeList);
 
   return sumOfIntegersInArray(durationArray);
-}
-
-GarminCourse.prototype.getDuration = function() {
-  return this.totalDuration();
 }
 
 GarminCourse.prototype.getPace = function() {
