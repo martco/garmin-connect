@@ -1,17 +1,3 @@
-function Meters(value){
-  this.value = parseFloat(value);
-}
-
-Meters.prototype.toMiles = function() {
-  return this.value * 0.000621371;
-}
-
-sumOfIntegersInArray = function(arr){
-  return arr.reduce(function(previous, current){
-    return parseInt(previous) + parseInt(current);
-  });
-};
-
 function GarminCourse(data, options){
   this.data = data;
   this.distanceUnit = options.distanceUnit || 'mi';
@@ -22,7 +8,8 @@ GarminCourse.prototype.distanceSelector = 'DistanceMeters';
 GarminCourse.prototype.durationSelector = 'TotalTimeSeconds';
 
 GarminCourse.prototype.getCalories = function() {
-  calorieArray = this.textContentFromNodeList('Calories')
+  nodeList = this.data.querySelectorAll('Calories');
+  calorieArray = textContentFromNodeList(nodeList)
 
   return sumOfIntegersInArray(calorieArray);
 }
@@ -39,7 +26,8 @@ GarminCourse.prototype.totalDistance = function() {
 }
 
 GarminCourse.prototype.totalDuration = function() {
-  durationArray = this.textContentFromNodeList(this.durationSelector);
+  nodeList = this.data.querySelectorAll(this.durationSelector);
+  durationArray = textContentFromNodeList(nodeList);
 
   return sumOfIntegersInArray(durationArray);
 }
@@ -60,16 +48,10 @@ GarminCourse.prototype.formattedDistance = function(distance) {
 };
 
 GarminCourse.prototype.topMetersPerSecond = function() {
-  maxSpeeds = this.textContentFromNodeList('MaximumSpeed');
+  nodeList = this.data.querySelectorAll('MaximumSpeed') 
+  maxSpeeds = textContentFromNodeList(nodeList);
+
   return Math.max.apply(Math, maxSpeeds);
 }
 
 
-GarminCourse.prototype.textContentFromNodeList = function(nodeListSelector) {
-  nodeList = this.data.querySelectorAll(nodeListSelector);
-  return Array.prototype.map.call(nodeList, this.getTextContent);
-}
-
-GarminCourse.prototype.getTextContent = function(element) {
-  return element.textContent;
-}
