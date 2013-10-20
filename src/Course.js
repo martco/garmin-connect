@@ -6,17 +6,6 @@ Meters.prototype.toMiles = function() {
   return this.value * 0.000621371;
 }
 
-function Seconds(value){
-  this.value = parseInt(value);
-}
-
-Seconds.prototype.toMinutes = function() {
-  return {
-    minute: parseInt(this.value / 60),
-    seconds: this.value % 60
-  };
-}
-
 sumOfIntegersInArray = function(arr){
   return arr.reduce(function(previous, current){
     return parseInt(previous) + parseInt(current);
