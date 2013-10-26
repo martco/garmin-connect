@@ -34,7 +34,7 @@ GarminTrackPoint.prototype.getPosition = function() {
   }
 }
 
-GarminTrackPoint.prototype.distanceSelector = GarminCourse.prototype.distanceSelector;
+GarminTrackPoint.prototype.distanceSelector  = GarminCourse.prototype.distanceSelector;
 GarminTrackPoint.prototype.formattedDistance = GarminCourse.prototype.formattedDistance;
-GarminTrackPoint.prototype.totalDistance = GarminCourse.prototype.totalDistance;
-GarminTrackPoint.prototype.getDistance = GarminCourse.prototype.getDistance;
+GarminTrackPoint.prototype.totalDistance     = GarminCourse.prototype.totalDistance;
+GarminTrackPoint.prototype.getDistance       = GarminCourse.prototype.getDistance;
