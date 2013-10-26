@@ -14,8 +14,14 @@ GarminTrackPoint.prototype.getSpeed = function() {
   if(ext) {
     tpx = this.data.querySelector('TPX');
     if(tpx) {
-      speed = this.data.querySelector('Speed');
-      if(speed) { return this.formattedDistance(new Meters(speed.textContent)).toString(); }
+      // a number representing the meters per second
+      meters = new Meters(this.data.querySelector('Speed').textContent);
+
+      // miles per second (fraction, obviously)
+      miles = this.formattedDistance(meters);
+
+      // how many seconds per mile?
+      if(meters) { return 1 / miles; }
     } 
   }
 }
