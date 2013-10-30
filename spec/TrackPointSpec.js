@@ -33,7 +33,7 @@ describe("GarminTrackPoint", function() {
   });
 
   describe("getSpeed()", function(){
-    it("returns seconds per mile", function() {
+    it("returns total number of seconds per 1 mile", function() {
       expect(trackPoint.getSpeed()).toBeCloseTo(469.059, 2);
     });
   });

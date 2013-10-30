@@ -30,7 +30,7 @@ describe("GarminCourse", function() {
   });
 
   describe("getCalories()", function(){
-    it("returns the calories", function() { 
+    it("returns the total calories burned during the activity", function() { 
       expect(course.getCalories()).toEqual(407);
     });
   });

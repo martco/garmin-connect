@@ -1,5 +1,6 @@
 function GarminTrackPoint(data, options){
   this.data = data;
+  // TODO: these properties don't need to be set on creation of every trackpoint
   this.distanceUnit = options.distanceUnit || 'mi';
   this.timeUnit = options.timeUnit || 'minute';
 };
@@ -15,13 +16,14 @@ GarminTrackPoint.prototype.getSpeed = function() {
     tpx = this.data.querySelector('TPX');
     if(tpx) {
       // a number representing the meters per second
+      // this assumes each TrackPoint lasts one second
       meters = new Meters(this.data.querySelector('Speed').textContent);
 
       // miles per second (fraction, obviously)
-      miles = this.formattedDistance(meters);
+      milesPerSecond = this.formattedDistance(meters);
 
       // how many seconds per mile?
-      if(meters) { return 1 / miles; }
+      if(meters) { return 1 / milesPerSecond; }
     } 
   }
 }
