@@ -2,23 +2,17 @@ describe("GarminTrackPointCollection", function(){
 
   var trackPoints;
   var garminDocument;
+  var trackPointCollection;
 
   beforeEach(function(){
     garminDocument = document.querySelector('iframe').contentDocument;
+    trackPoints = garminDocument.querySelectorAll('Trackpoint');
+
+    trackPointCollection = new GarminTrackPointCollection(trackPoints);
   });
 
-  it('defines the garminDocument', function() {
-    expect(garminDocument).toBeDefined();
-  });
-
-  xit('returns the first trackPoint as the first element in the collection', function(){
-
-  });
-
-  // there appears to be one trackpoint per second. Facebook wants one trackpoint for every
-  // 30 seconds of activity. 
-  xit('returns the 30th trackPoint as the second element in the collection', function(){
-
+  it('collectedTrackpoints has a length equal to trackPoints.length / 30 (every 30th trackpoint)', function(){
+    expect(trackPointCollection.collectedTrackPoints.length).toEqual(Math.ceil(trackPoints.length / 30));
   });
 
 });
